@@ -1,5 +1,8 @@
 package com.cassandrawebtrader.config;
 import java.util.Locale;
+
+import javax.servlet.Filter;
+
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
@@ -14,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import com.cassandrawebtrader.filter.RestLoggingFilter;
 
 /**
  * @author puneethkumar
@@ -106,6 +111,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/login").setViewName("login");
 	}
 	
+	 @Bean
+	  public Filter restLoggingFilter() {
+	    return new RestLoggingFilter();
+	  }
 	
 
 }
